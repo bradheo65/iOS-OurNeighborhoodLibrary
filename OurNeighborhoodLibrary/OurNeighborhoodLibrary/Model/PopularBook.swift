@@ -7,24 +7,20 @@
 
 import Foundation
 
-// MARK: - Welcome
 struct PopularBook: Codable, Hashable {
     let response: Response
 }
 
-// MARK: - Response
 struct Response: Codable, Hashable {
     let request: Request
     let resultNum, numFound: Int
     let docs: [DocElement]
 }
 
-// MARK: - DocElement
 struct DocElement: Codable, Hashable {
     let doc: DocDoc
 }
 
-// MARK: - DocDoc
 struct DocDoc: Codable, Hashable {
     let no: Int
     let ranking, bookname, authors, publisher: String
@@ -47,7 +43,6 @@ struct DocDoc: Codable, Hashable {
     }
 }
 
-// MARK: - Request
 struct Request: Codable, Hashable {
     let startDt, endDt, fromAge, toAge: String
     let addCode, kdc, region: String
