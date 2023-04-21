@@ -11,8 +11,9 @@ import Then
 
 final class BooksViewController: UIViewController {
     
-    enum Section: CaseIterable {
-        case PopularbookList
+    enum Section: String, CaseIterable {
+        case PopularBookList = "인기 도서"
+        case HotBookList = "대출 급상승 도서"
     }
     
     private lazy var collectionView = UICollectionView(
@@ -24,23 +25,37 @@ final class BooksViewController: UIViewController {
             withReuseIdentifier: BooksHeaderView.id
         )
         collectionView.register(
-            PopularbookListCell.self,
-            forCellWithReuseIdentifier: PopularbookListCell.id
+            HotBookListCell.self,
+            forCellWithReuseIdentifier: HotBookListCell.id
+        )
+        collectionView.register(
+            PopularBookListCell.self,
+            forCellWithReuseIdentifier: PopularBookListCell.id
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, AnyHashable> = .init(collectionView: self.collectionView) { collectionView, indexPath, object in
-        if let object = object as? DocElement {
+        if let object = object as? PopularBookDocElement {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PopularbookListCell.id,
+                withReuseIdentifier: PopularBookListCell.id,
                 for: indexPath
-            ) as? PopularbookListCell else {
+            ) as? PopularBookListCell else {
                 return nil
             }
             cell.configure(
                 with: object.doc
             )
+            return cell
+        }
+        if let object = object as? HotBookDocElement {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: HotBookListCell.id,
+                for: indexPath
+            ) as? HotBookListCell else {
+                return nil
+            }
+            cell.configure(with: object)
             return cell
         }
         
@@ -55,10 +70,10 @@ final class BooksViewController: UIViewController {
         setupLayout()
         setupNavigationBar()
         setupHeaderView()
-
-        getDocsInfo()
-    }
         
+        fetchBooks()
+    }
+    
 }
 
 private extension BooksViewController {
@@ -81,14 +96,16 @@ private extension BooksViewController {
     func setupCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionNumber, _ in
             if sectionNumber == 0 {
-                return BooksViewController.topSection()
+                return BooksViewController.PopularBookListLayout()
+            } else if sectionNumber == 1 {
+                return BooksViewController.HotBookListLayout()
             }
             return nil
         }
         return layout
     }
     
-    static func topSection() -> NSCollectionLayoutSection {
+    static func PopularBookListLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -108,7 +125,44 @@ private extension BooksViewController {
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 15
         section.contentInsets.trailing = 15
-
+        
+        let kind = UICollectionView.elementKindSectionHeader
+        section.boundarySupplementaryItems = [
+            .init(
+                layoutSize:
+                        .init(
+                            widthDimension: .fractionalWidth(1),
+                            heightDimension: .absolute(50)
+                        ),
+                elementKind: kind,
+                alignment: .topLeading
+            )
+        ]
+        return section
+    }
+    
+    static func HotBookListLayout() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1/3)
+            )
+        )
+        item.contentInsets.trailing = 15
+        item.contentInsets.bottom = 30
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(0.9),
+                heightDimension: .absolute(300)
+            ),
+            subitems: [item]
+        )
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        section.contentInsets.leading = 15
+        section.contentInsets.trailing = 15
+        
         let kind = UICollectionView.elementKindSectionHeader
         section.boundarySupplementaryItems = [
             .init(
@@ -137,41 +191,44 @@ private extension BooksViewController {
             let object = self.diffableDataSource.itemIdentifier(for: indexPath)
             let section = snapshot.sectionIdentifier(containingItem: object!)!
             
-            if section == .PopularbookList {
-                header.configure(with: "인기 도서 목록")
+            if section == .PopularBookList {
+                header.configure(with: Section.PopularBookList.rawValue)
+            } else if section == .HotBookList {
+                header.configure(with: Section.HotBookList.rawValue)
             }
             return header
         }
     }
     
-    func getDocsInfo() {
-        URLSessionManager.shared.getDocsInfo(
-            to: GetDocsAPI(
-                startDt: "2023-04-15", endDt: "2023-04-20", fromeAge: "6", toAge: "18", pageSize: "10"
+    func fetchBooks() {
+        URLSessionManager.shared.fetchPopularBookList(
+            to: PopularBookAPIInfo(
+                startDt: "2023-04-15",
+                endDt: "2023-04-20",
+                fromeAge: "6",
+                toAge: "18",
+                pageSize: "10"
             )
-        ) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let docsData = try JSONDecoder().decode(PopularBook.self, from: data)
-                    DispatchQueue.main.async {
-                        self.applySnapShot(data: docsData.response.docs)
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
+        ) { popularBook, err  in
+            URLSessionManager.shared.fetchHotBookList(
+                to: HotBookAPIInfo(
+                    searchDt: "2023-04-19"
+                )
+            ) { hotBook, err in
+                var snapShot = self.diffableDataSource.snapshot()
+                snapShot.appendSections([.PopularBookList, .HotBookList])
+                
+                snapShot.appendItems(
+                    popularBook,
+                    toSection: .PopularBookList
+                )
+                snapShot.appendItems(
+                    hotBook,
+                    toSection: .HotBookList
+                )
+                self.diffableDataSource.apply(snapShot, animatingDifferences: true)
             }
         }
     }
-    
-    func applySnapShot(data: [AnyHashable]) {
-        var snapShot = diffableDataSource.snapshot()
-        snapShot.appendSections([.PopularbookList])
-        snapShot.appendItems(data, toSection: .PopularbookList)
         
-        self.diffableDataSource.apply(snapShot, animatingDifferences: true)
-    }
-  
 }

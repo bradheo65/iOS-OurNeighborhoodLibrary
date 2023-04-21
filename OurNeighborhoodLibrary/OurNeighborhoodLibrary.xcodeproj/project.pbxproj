@@ -10,9 +10,11 @@
 		A347868D29F11E51005417B3 /* URLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347868C29F11E51005417B3 /* URLSessionManager.swift */; };
 		A347869229F12953005417B3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A347869129F12953005417B3 /* SnapKit */; };
 		A347869529F12971005417B3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A347869429F12971005417B3 /* Then */; };
-		A347869829F15C7E005417B3 /* PopularbookListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869729F15C7E005417B3 /* PopularbookListCell.swift */; };
+		A347869829F15C7E005417B3 /* PopularBookListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869729F15C7E005417B3 /* PopularBookListCell.swift */; };
 		A347869A29F1704B005417B3 /* BooksHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869929F1704B005417B3 /* BooksHeaderView.swift */; };
 		A347869F29F24A61005417B3 /* Extension+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869E29F24A61005417B3 /* Extension+CALayer.swift */; };
+		A34786A129F24E6B005417B3 /* HotBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34786A029F24E6B005417B3 /* HotBook.swift */; };
+		A34786A329F2528A005417B3 /* HotBookListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34786A229F2528A005417B3 /* HotBookListCell.swift */; };
 		A3E3792C29F032B900FE688E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792B29F032B900FE688E /* AppDelegate.swift */; };
 		A3E3792E29F032B900FE688E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792D29F032B900FE688E /* SceneDelegate.swift */; };
 		A3E3793029F032B900FE688E /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792F29F032B900FE688E /* BooksViewController.swift */; };
@@ -24,9 +26,11 @@
 
 /* Begin PBXFileReference section */
 		A347868C29F11E51005417B3 /* URLSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionManager.swift; sourceTree = "<group>"; };
-		A347869729F15C7E005417B3 /* PopularbookListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularbookListCell.swift; sourceTree = "<group>"; };
+		A347869729F15C7E005417B3 /* PopularBookListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBookListCell.swift; sourceTree = "<group>"; };
 		A347869929F1704B005417B3 /* BooksHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksHeaderView.swift; sourceTree = "<group>"; };
 		A347869E29F24A61005417B3 /* Extension+CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CALayer.swift"; sourceTree = "<group>"; };
+		A34786A029F24E6B005417B3 /* HotBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBook.swift; sourceTree = "<group>"; };
+		A34786A229F2528A005417B3 /* HotBookListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBookListCell.swift; sourceTree = "<group>"; };
 		A3E3792829F032B900FE688E /* OurNeighborhoodLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OurNeighborhoodLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E3792B29F032B900FE688E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3E3792D29F032B900FE688E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,7 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				A347869929F1704B005417B3 /* BooksHeaderView.swift */,
-				A347869729F15C7E005417B3 /* PopularbookListCell.swift */,
+				A347869729F15C7E005417B3 /* PopularBookListCell.swift */,
+				A34786A229F2528A005417B3 /* HotBookListCell.swift */,
 			);
 			path = Books;
 			sourceTree = "<group>";
@@ -136,8 +141,9 @@
 		A3E3794129F0D65600FE688E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A3E3794229F0F20000FE688E /* PopularBook.swift */,
 				A3E3793F29F0D56F00FE688E /* NetworkAPI.swift */,
+				A3E3794229F0F20000FE688E /* PopularBook.swift */,
+				A34786A029F24E6B005417B3 /* HotBook.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,13 +228,15 @@
 			files = (
 				A347869F29F24A61005417B3 /* Extension+CALayer.swift in Sources */,
 				A347868D29F11E51005417B3 /* URLSessionManager.swift in Sources */,
+				A34786A129F24E6B005417B3 /* HotBook.swift in Sources */,
 				A3E3793029F032B900FE688E /* BooksViewController.swift in Sources */,
 				A3E3792C29F032B900FE688E /* AppDelegate.swift in Sources */,
 				A3E3792E29F032B900FE688E /* SceneDelegate.swift in Sources */,
+				A34786A329F2528A005417B3 /* HotBookListCell.swift in Sources */,
 				A3E3794329F0F20000FE688E /* PopularBook.swift in Sources */,
 				A3E3794029F0D56F00FE688E /* NetworkAPI.swift in Sources */,
 				A347869A29F1704B005417B3 /* BooksHeaderView.swift in Sources */,
-				A347869829F15C7E005417B3 /* PopularbookListCell.swift in Sources */,
+				A347869829F15C7E005417B3 /* PopularBookListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
