@@ -8,20 +8,20 @@
 import Foundation
 
 struct PopularBook: Codable, Hashable {
-    let response: Response
+    let response: PopularBookResponse
 }
 
-struct Response: Codable, Hashable {
-    let request: Request
+struct PopularBookResponse: Codable, Hashable {
+    let request: PopularBookRequest
     let resultNum, numFound: Int
-    let docs: [DocElement]
+    let docs: [PopularBookDocElement]
 }
 
-struct DocElement: Codable, Hashable {
-    let doc: DocDoc
+struct PopularBookDocElement: Codable, Hashable {
+    let doc: PopularBookDocDoc
 }
 
-struct DocDoc: Codable, Hashable {
+struct PopularBookDocDoc: Codable, Hashable {
     let no: Int
     let ranking, bookname, authors, publisher: String
     let publicationYear, isbn13, additionSymbol, vol: String
@@ -43,7 +43,7 @@ struct DocDoc: Codable, Hashable {
     }
 }
 
-struct Request: Codable, Hashable {
+struct PopularBookRequest: Codable, Hashable {
     let startDt, endDt, fromAge, toAge: String
     let addCode, kdc, region: String
     let pageNo, pageSize: Int
