@@ -7,21 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A347868D29F11E51005417B3 /* URLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347868C29F11E51005417B3 /* URLSessionManager.swift */; };
+		A347869229F12953005417B3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A347869129F12953005417B3 /* SnapKit */; };
+		A347869529F12971005417B3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A347869429F12971005417B3 /* Then */; };
+		A347869829F15C7E005417B3 /* PopularbookListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869729F15C7E005417B3 /* PopularbookListCell.swift */; };
+		A347869A29F1704B005417B3 /* BooksHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869929F1704B005417B3 /* BooksHeaderView.swift */; };
+		A347869F29F24A61005417B3 /* Extension+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347869E29F24A61005417B3 /* Extension+CALayer.swift */; };
 		A3E3792C29F032B900FE688E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792B29F032B900FE688E /* AppDelegate.swift */; };
 		A3E3792E29F032B900FE688E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792D29F032B900FE688E /* SceneDelegate.swift */; };
-		A3E3793029F032B900FE688E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792F29F032B900FE688E /* ViewController.swift */; };
+		A3E3793029F032B900FE688E /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3792F29F032B900FE688E /* BooksViewController.swift */; };
 		A3E3793529F032BA00FE688E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3E3793429F032BA00FE688E /* Assets.xcassets */; };
 		A3E3793829F032BA00FE688E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E3793629F032BA00FE688E /* LaunchScreen.storyboard */; };
+		A3E3794029F0D56F00FE688E /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3793F29F0D56F00FE688E /* NetworkAPI.swift */; };
+		A3E3794329F0F20000FE688E /* PopularBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E3794229F0F20000FE688E /* PopularBook.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A347868C29F11E51005417B3 /* URLSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionManager.swift; sourceTree = "<group>"; };
+		A347869729F15C7E005417B3 /* PopularbookListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularbookListCell.swift; sourceTree = "<group>"; };
+		A347869929F1704B005417B3 /* BooksHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksHeaderView.swift; sourceTree = "<group>"; };
+		A347869E29F24A61005417B3 /* Extension+CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CALayer.swift"; sourceTree = "<group>"; };
 		A3E3792829F032B900FE688E /* OurNeighborhoodLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OurNeighborhoodLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E3792B29F032B900FE688E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3E3792D29F032B900FE688E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A3E3792F29F032B900FE688E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A3E3792F29F032B900FE688E /* BooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
 		A3E3793429F032BA00FE688E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3E3793729F032BA00FE688E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3E3793929F032BA00FE688E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3E3793F29F0D56F00FE688E /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
+		A3E3794229F0F20000FE688E /* PopularBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBook.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +43,63 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A347869229F12953005417B3 /* SnapKit in Frameworks */,
+				A347869529F12971005417B3 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A347868E29F12868005417B3 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A347868C29F11E51005417B3 /* URLSessionManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		A347868F29F12914005417B3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A347869C29F17069005417B3 /* Books */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A347869629F15C6B005417B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A347869B29F17061005417B3 /* Books */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A347869B29F17061005417B3 /* Books */ = {
+			isa = PBXGroup;
+			children = (
+				A347869929F1704B005417B3 /* BooksHeaderView.swift */,
+				A347869729F15C7E005417B3 /* PopularbookListCell.swift */,
+			);
+			path = Books;
+			sourceTree = "<group>";
+		};
+		A347869C29F17069005417B3 /* Books */ = {
+			isa = PBXGroup;
+			children = (
+				A3E3792F29F032B900FE688E /* BooksViewController.swift */,
+			);
+			path = Books;
+			sourceTree = "<group>";
+		};
+		A347869D29F24A4E005417B3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A347869E29F24A61005417B3 /* Extension+CALayer.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		A3E3791F29F032B900FE688E = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +121,25 @@
 			children = (
 				A3E3792B29F032B900FE688E /* AppDelegate.swift */,
 				A3E3792D29F032B900FE688E /* SceneDelegate.swift */,
-				A3E3792F29F032B900FE688E /* ViewController.swift */,
+				A347869D29F24A4E005417B3 /* Extension */,
+				A347868E29F12868005417B3 /* Manager */,
+				A3E3794129F0D65600FE688E /* Model */,
+				A347869629F15C6B005417B3 /* View */,
+				A347868F29F12914005417B3 /* Controller */,
 				A3E3793429F032BA00FE688E /* Assets.xcassets */,
 				A3E3793629F032BA00FE688E /* LaunchScreen.storyboard */,
 				A3E3793929F032BA00FE688E /* Info.plist */,
 			);
 			path = OurNeighborhoodLibrary;
+			sourceTree = "<group>";
+		};
+		A3E3794129F0D65600FE688E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A3E3794229F0F20000FE688E /* PopularBook.swift */,
+				A3E3793F29F0D56F00FE688E /* NetworkAPI.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +158,10 @@
 			dependencies = (
 			);
 			name = OurNeighborhoodLibrary;
+			packageProductDependencies = (
+				A347869129F12953005417B3 /* SnapKit */,
+				A347869429F12971005417B3 /* Then */,
+			);
 			productName = OurNeighborhoodLibrary;
 			productReference = A3E3792829F032B900FE688E /* OurNeighborhoodLibrary.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +190,10 @@
 				Base,
 			);
 			mainGroup = A3E3791F29F032B900FE688E;
+			packageReferences = (
+				A347869029F12953005417B3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A347869329F12971005417B3 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = A3E3792929F032B900FE688E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +220,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3E3793029F032B900FE688E /* ViewController.swift in Sources */,
+				A347869F29F24A61005417B3 /* Extension+CALayer.swift in Sources */,
+				A347868D29F11E51005417B3 /* URLSessionManager.swift in Sources */,
+				A3E3793029F032B900FE688E /* BooksViewController.swift in Sources */,
 				A3E3792C29F032B900FE688E /* AppDelegate.swift in Sources */,
 				A3E3792E29F032B900FE688E /* SceneDelegate.swift in Sources */,
+				A3E3794329F0F20000FE688E /* PopularBook.swift in Sources */,
+				A3E3794029F0D56F00FE688E /* NetworkAPI.swift in Sources */,
+				A347869A29F1704B005417B3 /* BooksHeaderView.swift in Sources */,
+				A347869829F15C7E005417B3 /* PopularbookListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +438,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A347869029F12953005417B3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		A347869329F12971005417B3 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A347869129F12953005417B3 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A347869029F12953005417B3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		A347869429F12971005417B3 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A347869329F12971005417B3 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A3E3792029F032B900FE688E /* Project object */;
 }

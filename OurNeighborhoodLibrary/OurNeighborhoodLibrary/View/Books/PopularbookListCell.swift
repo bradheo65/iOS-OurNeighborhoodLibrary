@@ -13,7 +13,7 @@ final class PopularbookListCell: UICollectionViewListCell {
     
     static let id = "PopularbookListCell"
     
-    private lazy var imageView = UIImageView().then { imageView in
+    private lazy var bookImageView = UIImageView().then { imageView in
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 16
         imageView.contentMode = .scaleToFill
@@ -37,7 +37,7 @@ final class PopularbookListCell: UICollectionViewListCell {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: data)
+                    self.bookImageView.image = UIImage(data: data)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -50,13 +50,13 @@ final class PopularbookListCell: UICollectionViewListCell {
 private extension PopularbookListCell {
     
     func setupView() {
-        self.contentView.addSubview(imageView)
+        self.contentView.addSubview(bookImageView)
     }
     
     func setupLayout() {
-        imageView.snp.makeConstraints { make in
+        bookImageView.snp.makeConstraints { make in
             make.left.right.bottom.top.equalTo(self.contentView)
-            make.height.equalTo(imageView.snp.width).multipliedBy(0.4).priority(750)
+            make.height.equalTo(self.contentView.snp.width).multipliedBy(0.4).priority(750)
         }
     }
     

@@ -74,13 +74,12 @@ private extension BooksViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = "우리동네 도서관"
+        navigationItem.title = "Books"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func setupCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionNumber, _ in
-            
             if sectionNumber == 0 {
                 return BooksViewController.topSection()
             }
@@ -98,7 +97,6 @@ private extension BooksViewController {
         )
         item.contentInsets.trailing = 15
         item.contentInsets.bottom = 30
-        
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(0.4),
@@ -107,15 +105,21 @@ private extension BooksViewController {
             subitems: [item]
         )
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 15
-        
+        section.contentInsets.trailing = 15
+
         let kind = UICollectionView.elementKindSectionHeader
         section.boundarySupplementaryItems = [
-            .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                    heightDimension: .absolute(100)),
-                  elementKind: kind,
-                  alignment: .topLeading)
+            .init(
+                layoutSize:
+                        .init(
+                            widthDimension: .fractionalWidth(1),
+                            heightDimension: .absolute(50)
+                        ),
+                elementKind: kind,
+                alignment: .topLeading
+            )
         ]
         return section
     }
@@ -143,13 +147,13 @@ private extension BooksViewController {
     func getDocsInfo() {
         URLSessionManager.shared.getDocsInfo(
             to: GetDocsAPI(
-                startDt: "2023-04-15", endDt: "2023-04-20", fromeAge: "6", toAge: "18", pageSize: "5"
+                startDt: "2023-04-15", endDt: "2023-04-20", fromeAge: "6", toAge: "18", pageSize: "10"
             )
         ) { result in
             switch result {
             case .success(let data):
                 do {
-                    let docsData = try JSONDecoder().decode(Welcome.self, from: data)
+                    let docsData = try JSONDecoder().decode(PopularBook.self, from: data)
                     DispatchQueue.main.async {
                         self.applySnapShot(data: docsData.response.docs)
                     }
