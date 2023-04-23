@@ -1,5 +1,5 @@
 //
-//  PopularbookListCell.swift
+//  PopularBookListCell.swift
 //  OurNeighborhoodLibrary
 //
 //  Created by brad on 2023/04/20.
@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import Then
 
-final class PopularbookListCell: UICollectionViewListCell {
+final class PopularBookListCell: UICollectionViewListCell {
     
-    static let id = "PopularbookListCell"
+    static let id = "PopularBookListCell"
     
-    private lazy var imageView = UIImageView().then { imageView in
+    private lazy var bookImageView = UIImageView().then { imageView in
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 16
         imageView.contentMode = .scaleToFill
@@ -32,12 +32,12 @@ final class PopularbookListCell: UICollectionViewListCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with data: DocDoc) {
+    func configure(with data: PopularBookDocDoc) {
         URLSessionManager.shared.getImage(urlString: data.bookImageURL) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: data)
+                    self.bookImageView.image = UIImage(data: data)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -47,16 +47,15 @@ final class PopularbookListCell: UICollectionViewListCell {
     
 }
 
-private extension PopularbookListCell {
+private extension PopularBookListCell {
     
     func setupView() {
-        self.contentView.addSubview(imageView)
+        self.contentView.addSubview(bookImageView)
     }
     
     func setupLayout() {
-        imageView.snp.makeConstraints { make in
-            make.left.right.bottom.top.equalTo(self.contentView)
-            make.height.equalTo(imageView.snp.width).multipliedBy(0.4).priority(750)
+        bookImageView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(self.contentView)
         }
     }
     

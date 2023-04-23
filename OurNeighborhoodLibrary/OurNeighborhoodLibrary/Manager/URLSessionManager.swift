@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum CustomError: Error {
+    case JsonDecode
+}
+
 final class URLSessionManager {
     
     static let shared = URLSessionManager()
@@ -38,13 +42,14 @@ final class URLSessionManager {
         }.resume()
     }
     
-    func getDocsInfo(to data: GetDocsAPI, completion: @escaping (Result<Data, Error>) -> ()) {
-        guard let url = api.getDocsAPI(to: data).url else {
+    func fetchPopularBookList(to data: PopularBookAPIInfo, completion: @escaping ([PopularBookDocElement], Error) -> Void) {
+        guard let url = api.fetchAPIList(to: data).url else {
             return
         }
         session.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+            guard error == nil else {
+                print("Asd")
+                return
             }
             
             if let response = response as? HTTPURLResponse {
@@ -55,9 +60,42 @@ final class URLSessionManager {
             }
             
             if let data = data {
-                completion(.success(data))
+                do {
+                    let jsonData = try JSONDecoder().decode(PopularBook.self, from: data)
+                    completion(jsonData.response.docs, CustomError.JsonDecode)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }.resume()
     }
     
+    func fetchHotBookList(to data: HotBookAPIInfo, completion: @escaping ([HotBookResultElement], Error) -> Void) {
+        guard let url = api.fetchAPIList(to: data).url else {
+            return
+        }
+        session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                if !(200...299).contains(response.statusCode) {
+                    print(response.statusCode)
+                    return
+                }
+            }
+            
+            if let data = data {
+                do {
+                    let jsonData = try JSONDecoder().decode(HotBook.self, from: data)
+                    completion(jsonData.response.results, CustomError.JsonDecode)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+
 }

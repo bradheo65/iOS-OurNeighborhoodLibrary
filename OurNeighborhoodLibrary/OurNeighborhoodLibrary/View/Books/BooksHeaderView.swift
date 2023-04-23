@@ -14,12 +14,14 @@ final class BooksHeaderView: UICollectionReusableView {
     static let id = "BooksHeaderView"
     
     private lazy var titleLabel = UILabel().then { label in
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        self.layer.addBorder([.top], color: .secondarySystemFill, width: 1.0)
+
         setupView()
         setupLayout()
     }
