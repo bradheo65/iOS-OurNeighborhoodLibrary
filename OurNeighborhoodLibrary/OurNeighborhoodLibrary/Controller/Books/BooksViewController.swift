@@ -11,6 +11,8 @@ import Then
 
 final class BooksViewController: UIViewController {
     
+    private let date = Date()
+    
     enum Section: CaseIterable {
         case PopularBookList
         case HotBookList
@@ -201,9 +203,9 @@ private extension BooksViewController {
             case .PopularBookList:
                 header.configure(with: "인기 도서")
             case .HotBookList:
-                header.configure(with: "대출 급상승 도서 (04. 22)")
+                header.configure(with: "대출 급상승 도서 (\(self.date.today.dateFormatter))")
             case .YesterDayHotBookList:
-                header.configure(with: "대출 급상승 도서 (04. 21)")
+                header.configure(with: "대출 급상승 도서 (\(self.date.yesterday.dateFormatter))")
             }
             return header
         }
@@ -212,8 +214,8 @@ private extension BooksViewController {
     func fetchBooks() {
         URLSessionManager.shared.fetchPopularBookList(
             to: PopularBookAPIInfo(
-                startDt: "2023-04-15",
-                endDt: "2023-04-22",
+                startDt: date.weekly.dateFormatter,
+                endDt: date.today.dateFormatter,
                 fromeAge: "6",
                 toAge: "18",
                 pageSize: "10"
@@ -221,7 +223,7 @@ private extension BooksViewController {
         ) { popularBook, err  in
             URLSessionManager.shared.fetchHotBookList(
                 to: HotBookAPIInfo(
-                    searchDt: "2023-04-22"
+                    searchDt: self.date.yesterday.dateFormatter
                 )
             ) { hotBook, err in
                 var snapShot = self.diffableDataSource.snapshot()
