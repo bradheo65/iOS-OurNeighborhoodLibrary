@@ -96,14 +96,17 @@ private extension BooksViewController {
     
     func setupCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionNumber, _ in
-            if sectionNumber == 0 {
+            
+            switch sectionNumber {
+            case 0:
                 return BooksViewController.PopularBookListLayout()
-            } else if sectionNumber == 1 {
+            case 1:
                 return BooksViewController.HotBookListLayout()
-            } else if sectionNumber == 2 {
+            case 2:
                 return BooksViewController.HotBookListLayout()
+            default:
+                return nil
             }
-            return nil
         }
         return layout
     }
@@ -194,11 +197,12 @@ private extension BooksViewController {
             let object = self.diffableDataSource.itemIdentifier(for: indexPath)
             let section = snapshot.sectionIdentifier(containingItem: object!)!
             
-            if section == .PopularBookList {
+            switch section {
+            case .PopularBookList:
                 header.configure(with: "인기 도서")
-            } else if section == .HotBookList {
+            case .HotBookList:
                 header.configure(with: "대출 급상승 도서 (04. 22)")
-            } else if section == .YesterDayHotBookList {
+            case .YesterDayHotBookList:
                 header.configure(with: "대출 급상승 도서 (04. 21)")
             }
             return header
@@ -224,7 +228,6 @@ private extension BooksViewController {
                 snapShot.appendSections(
                     [.PopularBookList, .HotBookList, .YesterDayHotBookList]
                 )
-                
                 snapShot.appendItems(
                     popularBook,
                     toSection: .PopularBookList
