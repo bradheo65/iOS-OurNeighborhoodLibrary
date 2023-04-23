@@ -37,21 +37,22 @@ struct HotBookDocElement: Codable, Hashable {
 struct HotBookDocDoc: Codable, Hashable {
     let no, difference, baseWeekRank, pastWeekRank: Int
     let bookname, authors, publisher, publicationYear: String
-    let isbn13, additionSymbol: String
-    let vol: String?
-    let classNo, classNm: String
+    let isbn13: String
+    let additionSymbol, classNo: String?
+    let classNm: String
     let bookImageURL: String
     let bookDtlURL: String
+    let vol: String?
 
     enum CodingKeys: String, CodingKey {
         case no, difference, baseWeekRank, pastWeekRank, bookname, authors, publisher
         case publicationYear = "publication_year"
         case isbn13
         case additionSymbol = "addition_symbol"
-        case vol
         case classNo = "class_no"
         case classNm = "class_nm"
         case bookImageURL
         case bookDtlURL = "bookDtlUrl"
+        case vol
     }
 }

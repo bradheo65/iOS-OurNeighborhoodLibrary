@@ -212,7 +212,7 @@ private extension BooksViewController {
         ) { popularBook, err  in
             URLSessionManager.shared.fetchHotBookList(
                 to: HotBookAPIInfo(
-                    searchDt: "2023-04-19"
+                    searchDt: "2023-04-23"
                 )
             ) { hotBook, err in
                 var snapShot = self.diffableDataSource.snapshot()
