@@ -70,7 +70,7 @@ final class URLSessionManager {
         }.resume()
     }
     
-    func fetchHotBookList(to data: HotBookAPIInfo, completion: @escaping ([HotBookDocElement], Error) -> Void) {
+    func fetchHotBookList(to data: HotBookAPIInfo, completion: @escaping ([HotBookResultElement], Error) -> Void) {
         guard let url = api.fetchAPIList(to: data).url else {
             return
         }
@@ -90,7 +90,7 @@ final class URLSessionManager {
             if let data = data {
                 do {
                     let jsonData = try JSONDecoder().decode(HotBook.self, from: data)
-                    completion(jsonData.response.results[0].result.docs, CustomError.JsonDecode)
+                    completion(jsonData.response.results, CustomError.JsonDecode)
                 } catch {
                     print(error.localizedDescription)
                 }

@@ -11,9 +11,10 @@ import Then
 
 final class BooksViewController: UIViewController {
     
-    enum Section: String, CaseIterable {
-        case PopularBookList = "인기 도서"
-        case HotBookList = "대출 급상승 도서"
+    enum Section: CaseIterable {
+        case PopularBookList
+        case HotBookList
+        case YesterDayHotBookList
     }
     
     private lazy var collectionView = UICollectionView(
@@ -98,6 +99,8 @@ private extension BooksViewController {
             if sectionNumber == 0 {
                 return BooksViewController.PopularBookListLayout()
             } else if sectionNumber == 1 {
+                return BooksViewController.HotBookListLayout()
+            } else if sectionNumber == 2 {
                 return BooksViewController.HotBookListLayout()
             }
             return nil
@@ -192,9 +195,11 @@ private extension BooksViewController {
             let section = snapshot.sectionIdentifier(containingItem: object!)!
             
             if section == .PopularBookList {
-                header.configure(with: Section.PopularBookList.rawValue)
+                header.configure(with: "인기 도서")
             } else if section == .HotBookList {
-                header.configure(with: Section.HotBookList.rawValue)
+                header.configure(with: "대출 급상승 도서 (04. 22)")
+            } else if section == .YesterDayHotBookList {
+                header.configure(with: "대출 급상승 도서 (04. 21)")
             }
             return header
         }
@@ -204,7 +209,7 @@ private extension BooksViewController {
         URLSessionManager.shared.fetchPopularBookList(
             to: PopularBookAPIInfo(
                 startDt: "2023-04-15",
-                endDt: "2023-04-20",
+                endDt: "2023-04-22",
                 fromeAge: "6",
                 toAge: "18",
                 pageSize: "10"
@@ -212,19 +217,25 @@ private extension BooksViewController {
         ) { popularBook, err  in
             URLSessionManager.shared.fetchHotBookList(
                 to: HotBookAPIInfo(
-                    searchDt: "2023-04-23"
+                    searchDt: "2023-04-22"
                 )
             ) { hotBook, err in
                 var snapShot = self.diffableDataSource.snapshot()
-                snapShot.appendSections([.PopularBookList, .HotBookList])
+                snapShot.appendSections(
+                    [.PopularBookList, .HotBookList, .YesterDayHotBookList]
+                )
                 
                 snapShot.appendItems(
                     popularBook,
                     toSection: .PopularBookList
                 )
                 snapShot.appendItems(
-                    hotBook,
+                    hotBook[0].result.docs,
                     toSection: .HotBookList
+                )
+                snapShot.appendItems(
+                    hotBook[1].result.docs,
+                    toSection: .YesterDayHotBookList
                 )
                 self.diffableDataSource.apply(snapShot, animatingDifferences: true)
             }
