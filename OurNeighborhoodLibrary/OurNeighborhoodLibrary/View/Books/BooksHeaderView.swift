@@ -11,16 +11,16 @@ import Then
 
 final class BooksHeaderView: UICollectionReusableView {
     
-    static let id = "BooksHeaderView"
+    static let id = Setup.id
     
     private lazy var titleLabel = UILabel().then { label in
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: Setup.titleFontSize, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layer.addBorder([.top], color: .secondarySystemFill, width: 1.0)
+        self.layer.addBorder([.top], color: .secondarySystemFill, width: Setup.borderWidth)
 
         setupView()
         setupLayout()
@@ -37,6 +37,12 @@ final class BooksHeaderView: UICollectionReusableView {
 }
 
 private extension BooksHeaderView {
+    
+    enum Setup {
+        static let id: String = "BooksHeaderView"
+        static let titleFontSize: CGFloat = 20
+        static let borderWidth: Double = 1.0
+    }
     
     func setupView() {
         self.addSubview(titleLabel)

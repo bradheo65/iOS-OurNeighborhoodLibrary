@@ -11,11 +11,11 @@ import Then
 
 final class HotBookListCell: UICollectionViewListCell {
     
-    static let id = "HotBookListCell"
+    static let id = Setup.id
     
     private lazy var bookImageView = UIImageView().then { imageView in
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 16
+        imageView.layer.cornerRadius = Setup.cornerRadius
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -27,19 +27,19 @@ final class HotBookListCell: UICollectionViewListCell {
     
     private lazy var bookNameLabel = UILabel().then { label in
         label.font = .preferredFont(forTextStyle: .headline)
-        label.numberOfLines = 1
+        label.numberOfLines = Setup.numberOfLine
         label.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var authorsLabel = UILabel().then { label in
         label.font = .preferredFont(forTextStyle: .footnote)
-        label.numberOfLines = 1
+        label.numberOfLines = Setup.numberOfLine
         label.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private lazy var publisherAndYearLabel = UILabel().then { label in
         label.font = .preferredFont(forTextStyle: .footnote)
-        label.numberOfLines = 1
+        label.numberOfLines = Setup.numberOfLine
         label.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -59,9 +59,9 @@ final class HotBookListCell: UICollectionViewListCell {
         super.prepareForReuse()
         
         bookImageView.image = nil
-        bookNameLabel.text = ""
-        authorsLabel.text = ""
-        publisherAndYearLabel.text = ""
+        bookNameLabel.text = nil
+        authorsLabel.text = nil
+        publisherAndYearLabel.text = nil
     }
     
     func configure(with data: HotBookDocElement) {
@@ -76,13 +76,23 @@ final class HotBookListCell: UICollectionViewListCell {
             }
         }
         bookNameLabel.text = data.doc.bookname
-        authorsLabel.text = "저자: \(data.doc.authors)"
-        publisherAndYearLabel.text = "출판: \(data.doc.publisher) | \(data.doc.publicationYear)"
+        authorsLabel.text = Setup.authorText + data.doc.authors
+        publisherAndYearLabel.text = Setup.publisherAndYearText + "\(data.doc.publisher) | \(data.doc.publicationYear)"
     }
     
 }
 
 private extension HotBookListCell {
+    
+    enum Setup {
+        static let id: String = "HotBookListCell"
+        static let cornerRadius: CGFloat = 16
+        static let numberOfLine: Int = 1
+        static let authorText: String = "저자: "
+        static let publisherAndYearText: String = "출판: "
+        static let bookImageViewMultiplied: Double = 0.2
+        static let verticalStackViewOffset: Double = 10
+    }
     
     func setupView() {
         [bookImageView, verticalStackView].forEach { view in
@@ -97,12 +107,12 @@ private extension HotBookListCell {
     func setupLayout() {
         bookImageView.snp.makeConstraints { make in
             make.leading.equalTo(self.contentView)
-            make.width.height.equalTo(self.contentView.snp.width).multipliedBy(0.2)
+            make.width.height.equalTo(self.contentView.snp.width).multipliedBy(Setup.bookImageViewMultiplied)
         }
         
         verticalStackView.snp.makeConstraints { make in
             make.bottom.top.trailing.equalTo(self.contentView)
-            make.leading.equalTo(bookImageView.snp.trailing).offset(10)
+            make.leading.equalTo(bookImageView.snp.trailing).offset(Setup.verticalStackViewOffset)
         }
     }
     

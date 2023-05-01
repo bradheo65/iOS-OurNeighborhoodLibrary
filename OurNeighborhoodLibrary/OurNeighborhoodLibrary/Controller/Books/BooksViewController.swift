@@ -17,6 +17,17 @@ final class BooksViewController: UIViewController {
         case PopularBookList
         case HotBookList
         case YesterDayHotBookList
+        
+        var title: String {
+            switch self {
+            case .PopularBookList:
+                return "인기 도서"
+            case .HotBookList:
+                return "대출 급상승 도서 (오늘)"
+            case .YesterDayHotBookList:
+                return "대출 급상승 도서 (어제)"
+            }
+        }
     }
     
     private lazy var collectionView = UICollectionView(
@@ -81,6 +92,13 @@ final class BooksViewController: UIViewController {
 
 private extension BooksViewController {
     
+    enum Setup {
+        static let title = "Books"
+        static let youngerAge = "8"
+        static let olderAge = "20"
+        static let pageNo = "10"
+    }
+    
     func setupView() {
         self.view.addSubview(collectionView)
     }
@@ -92,7 +110,7 @@ private extension BooksViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = "Books"
+        navigationItem.title = Setup.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -201,11 +219,11 @@ private extension BooksViewController {
             
             switch section {
             case .PopularBookList:
-                header.configure(with: "인기 도서")
+                header.configure(with: section.title)
             case .HotBookList:
-                header.configure(with: "대출 급상승 도서 (\(self.date.today.dateFormatter))")
+                header.configure(with: section.title)
             case .YesterDayHotBookList:
-                header.configure(with: "대출 급상승 도서 (\(self.date.yesterday.dateFormatter))")
+                header.configure(with: section.title)
             }
             return header
         }
@@ -216,9 +234,9 @@ private extension BooksViewController {
             to: PopularBookAPIInfo(
                 startDt: date.weekly.dateFormatter,
                 endDt: date.today.dateFormatter,
-                fromeAge: "6",
-                toAge: "18",
-                pageSize: "10"
+                fromeAge: Setup.youngerAge,
+                toAge: Setup.olderAge,
+                pageSize: Setup.pageNo
             )
         ) { popularBook, err  in
             URLSessionManager.shared.fetchHotBookList(

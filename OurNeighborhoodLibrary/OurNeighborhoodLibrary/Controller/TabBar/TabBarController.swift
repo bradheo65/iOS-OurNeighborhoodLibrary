@@ -20,6 +20,13 @@ final class TabBarController: UITabBarController {
 
 private extension TabBarController {
     
+    enum Setup {
+        static let booksImageName: String = "books.vertical.circle"
+        static let booksTitle: String = "Books"
+        static let searchBooksImageName: String = "magnifyingglass"
+        static let searchBooksTitle: String = "Search"
+    }
+    
     func setupTabBar() {
         self.tabBar.backgroundColor = .secondarySystemBackground
     }
@@ -29,17 +36,17 @@ private extension TabBarController {
             rootViewController: BooksViewController()
         )
         booksViewController.tabBarItem.image = UIImage(
-            systemName: "books.vertical.circle"
+            systemName: Setup.booksImageName
         )
-        booksViewController.title = "Books"
+        booksViewController.title = Setup.booksTitle
         
         let searchBooksViewController = UINavigationController(
             rootViewController: SearchBooksViewController()
         )
         searchBooksViewController.tabBarItem.image = UIImage(
-            systemName: "magnifyingglass"
+            systemName: Setup.searchBooksImageName
         )
-        searchBooksViewController.title = "Search"
+        searchBooksViewController.title = Setup.searchBooksTitle
         
         viewControllers = [
             booksViewController, searchBooksViewController

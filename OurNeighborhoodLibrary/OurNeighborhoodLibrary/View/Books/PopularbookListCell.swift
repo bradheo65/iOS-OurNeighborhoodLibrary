@@ -11,11 +11,11 @@ import Then
 
 final class PopularBookListCell: UICollectionViewListCell {
     
-    static let id = "PopularBookListCell"
+    static let id = Setup.id
     
     private lazy var bookImageView = UIImageView().then { imageView in
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 16
+        imageView.layer.cornerRadius = Setup.cornerRadius
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -48,6 +48,11 @@ final class PopularBookListCell: UICollectionViewListCell {
 }
 
 private extension PopularBookListCell {
+    
+    enum Setup {
+        static let id: String = "PopularBookListCell"
+        static let cornerRadius: CGFloat = 16
+    }
     
     func setupView() {
         self.contentView.addSubview(bookImageView)
