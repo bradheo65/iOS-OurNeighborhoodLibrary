@@ -130,6 +130,29 @@
 			path = SearchBooks;
 			sourceTree = "<group>";
 		};
+		A3A007182A00A8BF004AD7D8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A3E3793429F032BA00FE688E /* Assets.xcassets */,
+				A3E3793629F032BA00FE688E /* LaunchScreen.storyboard */,
+				A347869D29F24A4E005417B3 /* Extension */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		A3A007192A00A8FE004AD7D8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A3E3792B29F032B900FE688E /* AppDelegate.swift */,
+				A3E3792D29F032B900FE688E /* SceneDelegate.swift */,
+				A347868E29F12868005417B3 /* Manager */,
+				A3E3794129F0D65600FE688E /* Model */,
+				A347869629F15C6B005417B3 /* View */,
+				A347868F29F12914005417B3 /* Controller */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		A3E3791F29F032B900FE688E = {
 			isa = PBXGroup;
 			children = (
@@ -149,16 +172,9 @@
 		A3E3792A29F032B900FE688E /* OurNeighborhoodLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				A3E3792B29F032B900FE688E /* AppDelegate.swift */,
-				A3E3792D29F032B900FE688E /* SceneDelegate.swift */,
-				A347869D29F24A4E005417B3 /* Extension */,
-				A347868E29F12868005417B3 /* Manager */,
-				A3E3794129F0D65600FE688E /* Model */,
-				A347869629F15C6B005417B3 /* View */,
-				A347868F29F12914005417B3 /* Controller */,
-				A3E3793429F032BA00FE688E /* Assets.xcassets */,
-				A3E3793629F032BA00FE688E /* LaunchScreen.storyboard */,
 				A3E3793929F032BA00FE688E /* Info.plist */,
+				A3A007182A00A8BF004AD7D8 /* Resource */,
+				A3A007192A00A8FE004AD7D8 /* Source */,
 			);
 			path = OurNeighborhoodLibrary;
 			sourceTree = "<group>";
