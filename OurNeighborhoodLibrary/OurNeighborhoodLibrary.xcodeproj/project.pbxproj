@@ -72,9 +72,9 @@
 		A347868F29F12914005417B3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A34786A729F51023005417B3 /* SearchBooks */,
 				A34786A429F5032A005417B3 /* TabBar */,
 				A347869C29F17069005417B3 /* Books */,
+				A34786A729F51023005417B3 /* SearchBooks */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
